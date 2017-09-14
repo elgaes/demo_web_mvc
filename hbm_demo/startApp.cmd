@@ -1,0 +1,1 @@
+java.exe -jar C:\Workspaces\test\demo_web_mod\target\demo_web_mod_1.0.0-SNAPSHOT.jar

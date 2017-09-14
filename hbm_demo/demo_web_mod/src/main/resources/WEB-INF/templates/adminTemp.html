@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Client List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="/css/jquery-ui.css" />
+<link rel="stylesheet" href="/css/app.css" />
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>Basic Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+			<table class="table table-bordered table-striped ">
+				<thead class="thead">
+					<tr>
+						<th>Claim No.</th>
+						<th>Date</th>
+						<th>Status</th>
+						<th>Amount</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody id="claim_tbl">
+		
+			    </tbody>
+			</table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+<div class="jumbotron text-left">
+	  <h1>Current Client List</h1>  
+	  <p />
+	  <p>This page demonstrate the use of web technologies: </p>  
+	  <ul style="list-style-type:circle">
+		<li>JQuery, Ajax, JSON</li>
+		<li>Hibernate, JPA, Spring MVC </li>
+		<li>JScript, HTML5</li>
+		<li>Thymeleaf Templates</li>
+		</ul>
+</div>
+<div class="container">
+<div class="panel" th:unless="${#lists.isEmpty(personList)==false}">
+	<table class="table table-bordered table-striped">
+		<thead class="thead">
+			<tr>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Mobile</th>
+				<th>Email</th>
+				<th>Has Claims</th>
+			</tr>
+		</thead>
+		<tbody>
+	      <tr>
+	        <td colspan="5" class="text-center">Empty Person List <button onClick="openDialog('claimDialog')">AJAX</button></td>
+	      </tr>
+	    </tbody>
+	</table>
+</div>
+</div>
+<div class="panel" th:unless="${#lists.isEmpty(personList)}">
+	<table class="table table-bordered table-striped">
+		<thead class="thead">
+			<tr>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Mobile</th>
+				<th>Email</th>
+				<th>Has Claims</th>
+			</tr>
+		</thead>
+		<tbody>
+	      <tr th:each="person,row : ${personList}">
+		        <td th:text="${{person.firstName +' '+person.familyName}}" />
+		        <td th:text="${person.phoneNumber}" />
+		        <td th:text="${person.mobileNumber}" />
+		        <td th:text="${person.emailAddress}" />     
+		        <td class="bt_claim" >
+		        	<button type="button"
+		        			class="bt_claim btn btn-info btn-sm" 
+		        			th:id="${{person.personId}}" 
+		        			th:text="${{person.claims.size()}}" 
+		        			th:unless="${#lists.isEmpty(person.claims)}"
+	 							data-toggle="modal" 
+ 							data-target="#myModal"	        			
+		        			/>
+		        	<br />
+ 					<button type="button" class="btn btn-info btn-lg" 
+ 							data-toggle="modal" 
+ 							data-target="#myModal">Claim Details</button>		        			
+		        </td>
+	      </tr>
+	    </tbody>
+	</table>
+</div>
+
+<!--
+ <div id="claimDialog" 
+	title="Current Claim Details" 
+	class="container" role="dialog">
+	<div id="dialog" class="modal fade"  role="dialog">
+    <div  id="dialog" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+           	<button type="button" class="close" data-dismiss="modal">&times;</button>
+          	<h4 class="modal-title">Modal Header</h4>       
+       		<label>Name: </label><div id="clientName"></div>     
+        </div>
+        
+        <div class="modal-body">
+			<table class="table table-bordered table-striped ">
+				<thead class="thead">
+					<tr>
+						<th>Claim No.</th>
+						<th>Date</th>
+						<th>Status</th>
+						<th>Amount</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody id="claim_tbl">
+		
+			    </tbody>
+			</table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+ </div> 
+	</div>
+</div>
+-->
+<script>
+function openDialog(dialogId)
+{
+	var dialog="#"+dialogId;
+	$(dialog).dialog({autoOpen:false,
+					modal: true,
+		  			draggable: true,
+		  	        height: 450,
+		  	        width: 700});
+	$(dialog).dialog("open");	
+}
+
+ $(document).ready(function() {
+          $(".bt_claim").click(
+       	function(even) 
+       	{    	
+    			jQuery.ajax({
+                 url: "http://localhost:8080/views/person/claims",
+                 type: 'GET',
+                 data: {selectedPerson: this.id},
+                 dataType: "json",
+                 success: function(result)
+                 {
+               	    var tbl= $("#claim_tbl");
+               	    tbl.html("");
+	       			for(var claim in result)
+     						{
+     							tbl.append($("<tr />")).append(
+     									  $("<td />").text(result[claim].claimId),
+     									  $("<td />").text(result[claim].audit.createdDate),
+     									  $("<td />").text(result[claim].status),
+     									  $("<td />").text(result[claim].amount),
+     									  $("<td />").text(result[claim].description));
+     						}
+     		  				//openDialog('claimDialog');myModal
+     		  				openDialog("myModal");
+                 }
+                }); 
+         	  
+   			return false;
+   		});
+
+ });
+</script>
+	
+</body>
+</html>

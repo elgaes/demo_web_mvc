@@ -1,0 +1,26 @@
+.ui-widget-overlay
+{
+  opacity: .50 !important; 
+  filter: Alpha(Opacity=50) !important;
+  background-color: rgb(50, 50, 50) !important; 
+}
+
+
+div.tbl-float {
+  background-color:hsla(120,60%,70%,0.3);
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: left;
+}
+
+div.tbl-float-header {
+    background-color: #4CAF50;    
+    color: white;
+    padding: 10px;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+div.tbl-float-content {
+    padding: 10px;
+}

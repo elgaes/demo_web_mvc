@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>haibang.demo.app.claim</groupId>
+	<artifactId>demo_jpa_mod</artifactId>
+	<name>JPA Hibernate Demo</name>
+	<parent>
+		<groupId>haibang.demo.app</groupId>
+		<artifactId>claim</artifactId>
+		<version>1.0.0-SNAPSHOT</version>		
+		<relativePath>../demo_root_mod/pom.xml</relativePath>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>	
+		</dependency>
+<!--  
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+-->		
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/java/META-INF</directory>
+				<targetPath>META-INF</targetPath>
+			</resource>
+		</resources>	
+	</build>	
+</project>

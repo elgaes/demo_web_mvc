@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>All Claims</title> 
+	<meta charset="utf-8"></meta>
+   	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+ 	<link rel="stylesheet" href="/css/app.css" />
+	<link rel="stylesheet" href="/css/jquery-ui.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"/>
+
+	<script src="/js/jquery.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+    <script src="/js/bootstrap.js"></script>
+	<script src="/js/app.js"></script>   
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron text-left">
+	        <div class="page-header">
+	           	<h3 class="modal-title">All Available Claims</h3>             		  
+	        </div>		
+        </div>        
+		<div>		
+			<table class="table table-bordered table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Claim No.</th>
+						<th>Date</th>
+						<th>Status</th>
+						<th>Amount</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody th:unless="${#lists.isEmpty(claimList)==false}">
+			      <tr>
+				        <td>No Claim Available</td>
+			      </tr>
+			    </tbody>				
+				<tbody th:unless="${#lists.isEmpty(claimList)==true}">
+			      <tr th:each="claim,row : ${claimList}">
+				        <td th:text="${claim.claimId}" />
+				        <td th:text="${claim.audit.createdDate}" />
+				        <td th:text="${claim.status}" />
+				        <td th:text="${claim.amount}" />     
+				        <td th:text="${claim.description}" ></td>
+			      </tr>
+			    </tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

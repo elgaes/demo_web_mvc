@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Client List</title>
+	<meta charset="utf-8"></meta>
+   	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+   	
+ 	<link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/jquery-ui.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"/>
+
+	
+	<script src="/js/jquery.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/app.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-left">
+		  <div class="page-header">
+		  	<h1>Current Client List</h1>
+		  </div>  
+		  <p />
+		  <p>This page demonstrate the use of web technologies: </p>  
+		  <ul>
+				<li>JQuery, Ajax, JSON</li>
+				<li>Hibernate, JPA, Spring MVC </li>
+				<li>JScript, HTML5</li>
+				<li>Thymeleaf Templates</li>
+		  </ul>
+	</div>
+	<div class="panel">
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Client Id</th>
+					<th>Full Name</th>
+					<th>Phone</th>
+					<th>Mobile</th>
+					<th>Email</th>
+					<th>Has Claims</th>
+				</tr>
+			</thead>
+			
+<!-- Show this Person table content if the list returned is empty -->			
+			<tbody th:unless="${#lists.isEmpty(personList)==false}">
+		      <tr>
+		        <td colspan="5" class="text-center">Empty Person List <button onClick="openDialog('claimDialog')">AJAX</button></td>
+		      </tr>
+		    </tbody>			
+
+<!-- Show this Person table content if the list return not empty -->
+			<tbody th:unless="${#lists.isEmpty(personList)==true}">
+			  <!-- Iterate through the personList array and generate rows  -->
+		      <tr th:each="person,row : ${personList}">
+		      		<td th:text="${person.personId}" />
+			        <td th:text="${person.firstName +' '+person.familyName}" />
+			        <td th:text="${person.phoneNumber}" />
+			        <td th:text="${person.mobileNumber}" />
+			        <td th:text="${person.emailAddress}" />     
+			        <td>					        	
+			        	<button type="button"
+			        			class="bt_claim btn btn-info btn-sm" 
+			        			th:id="${person.personId}" 
+			        			th:text="${person.claims.size()}" 
+			        			th:unless="${#lists.isEmpty(person.claims)}"></button>
+	
+			        </td>
+		      </tr>
+		    </tbody>
+		</table>		
+	</div>
+</div>
+
+<!-- The section bellow use as template for the collapsible person claim table-->
+<div id="personClaimTbl" style="visibility: hidden; display: none">
+		<div class="tbl-float">
+			<div class="tbl-float-head">Claim Details</div>
+			<div class="tbl-float-body">
+				<table class="table table-bordered">
+					<thead >
+						<tr>
+							<th>Claim No.</th>
+							<th>Date</th>
+							<th>Status</th>
+							<th>Amount</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					
+					<tbody >
+					<!-- We will use AJAX to retrieve data from server and generate content body from returned JSON data here -->				
+				    </tbody>
+				</table>
+			</div>
+		</div>
+
+</div>
+
+</body>
+</html>
