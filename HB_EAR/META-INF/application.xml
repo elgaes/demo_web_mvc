@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" version="7">
+	<display-name>HB_EAR</display-name>
+	<module id="Module_1509375175535">
+		<web>
+			<web-uri>HB_WEB.war</web-uri>
+			<context-root>hb</context-root>
+		</web>
+	</module>
+	<security-role>
+		<role-name>PIR_OFFICER</role-name>
+	</security-role>
+	<security-role>
+		<role-name>CLAIM_OFFICER</role-name>
+	</security-role>
+	<security-role>
+		<role-name>CLAIM_ADMIN</role-name>
+	</security-role>
+	<security-role>
+		<role-name>PIR_ADMIN</role-name>
+	</security-role>
+	<security-role>
+		<role-name>DIGITIZE_USER</role-name>
+	</security-role>
+</application>
