@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="LoadMailData" restartable="true" version="1.0">
+	<step id="LOAD_MAIL_JOB">
+		<batchlet ref="au.gov.dva.digitize.batch.LoadMailData">
+			<properties >
+				<property name="runAt" value="#{jobParameters['runAt']}"/>
+			</properties>
+		</batchlet>
+	</step>
+</job>
