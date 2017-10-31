@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.dva.gov.au/ReceivedMailMeta" xmlns:tns="http://www.dva.gov.au/ReceivedMailMeta" elementFormDefault="qualified">
+
+    <element name="mailMeta" type="tns:MailMeta"></element>
+
+    <complexType name="MailMeta">
+    	<sequence>
+    		<element name="envelopeId" type="string"></element>
+    		<element name="docId" type="string"></element>
+    		<element name="bagId" type="string"></element>
+    		<element name="scanDate" type="date"></element>
+    		<element name="fileName" type="string"></element>
+            <element name="archiveNum" type="string"></element>
+            <element name="trimRef" type="string"></element>
+    		<element name="mailBox" type="string"></element>
+    	</sequence>
+    </complexType>
+</schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:mailMeta xmlns:tns="http://www.dva.gov.au/ReceivedMailMeta" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dva.gov.au/ReceivedMailMeta xsd/ReceivedMailMeta.xsd ">
+  <tns:envelopeId>E34590</tns:envelopeId>
+  <tns:docId>1200000214</tns:docId>
+  <tns:bagId>0001</tns:bagId>
+  <tns:scanDate>2001-01-01</tns:scanDate>
+  <tns:fileName>doc_1200000214_0001_E34590_EN123.pdf</tns:fileName>
+  <tns:archiveNum>NL1234</tns:archiveNum>
+  <tns:trimRef>TRF_12345_8956</tns:trimRef>
+  <tns:mailBox>mail1001</tns:mailBox>
+</tns:mailMeta>
